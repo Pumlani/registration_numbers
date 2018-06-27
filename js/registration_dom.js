@@ -1,9 +1,8 @@
-
 var inputReg = document.querySelector('.registrType');
- var filterElem = document.querySelector(".town-dropdown");
- var addBtnElem = document.querySelector('.add-btn');
- var alert = document.querySelector('.alert');
- var displayElem = document.querySelector(".display-area");
+var filterElem = document.querySelector(".town-dropdown");
+var addBtnElem = document.querySelector('.add-btn');
+var alert = document.querySelector('.alert');
+var displayElem = document.querySelector(".display-area");
 
 var storage = localStorage.getItem("plates") ? JSON.parse(localStorage.getItem("plates")) : {};
 var regObj = RegistrationFactory(storage);
@@ -18,20 +17,26 @@ function showAlert(msg, class_name) {
   alert.innerHTML = msg;
 }
 
-function createReg(num){
+function createReg(num) {
   let li = document.createElement("li");
   li.textContent = num;
   li.className = "regNum";
   displayElem.appendChild(li);
 
 }
-
+filterElem.addEventListener('change', function() {
+  displayElem.innerHTML= "";
+  let regList = regObj.filterBy(filterElem.value);
+    for (var i = 0; i < regList.length; i++) {
+      createReg(regList[i]);
+    }
+});
 
 
 addBtnElem.addEventListener('click', function() {
   var regNo = regObj.addRegistration(inputReg.value);
 
-  if (regNo){
+  if (regNo) {
     createReg(regNo);
     localStorage.setItem("plates", JSON.stringify(regObj.getMap()));
     showAlert("Registration number added successfully", "alert-success");
@@ -41,10 +46,10 @@ addBtnElem.addEventListener('click', function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
   let regList = Object.keys(regObj.getMap());
 
-  for(var i=0; i<regList.length;i++){
+  for (var i = 0; i < regList.length; i++) {
     createReg(regList[i]);
   }
 })
