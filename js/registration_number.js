@@ -2,7 +2,7 @@ function RegistrationFactory(stored) {
 
   var regList = stored || {};
   var validTags = ['CA', 'CY', 'CJ', 'CF'];
-  //  var reg = '';
+  //var reg = '';
   function addRegistration(registNo) {
     // CA 3467
     let tag = registNo.substring(0, 2).trim();
@@ -13,7 +13,7 @@ function RegistrationFactory(stored) {
       }
       //reg = registNo;
 
-      return registNo;
+      return true;
     }
     return false;
   }
