@@ -34,9 +34,9 @@ filterElem.addEventListener('change', function() {
 
 
 addBtnElem.addEventListener('click', function() {
-  var regNo = regObj.addRegistration(inputReg.value);
+  var regNo = regObj.addRegistration(inputReg.value).replace(' ', '');
 
-  if (regNo) {
+  if (regNo.length == 7) {
     createReg(regNo);
     localStorage.setItem("plates", JSON.stringify(regObj.getMap()));
     showAlert("Registration number added successfully", "alert-success");

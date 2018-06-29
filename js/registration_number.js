@@ -5,7 +5,7 @@ function RegistrationFactory(stored) {
   //var reg = '';
   function addRegistration(registNo) {
     // CA 3467
-    let tag = registNo.substring(0, 2).trim();
+    let tag = registNo.substring(0,2).trim();
     if (registNo != '' && validTags.includes(tag)) {
 
       if (regList[registNo] === undefined) {
@@ -13,7 +13,7 @@ function RegistrationFactory(stored) {
       }
       //reg = registNo;
 
-      return true;
+      return registNo;
     }
     return false;
   }
